@@ -25,7 +25,6 @@ class UserController extends Controller
                 'password' => 'required'
             ]);
 
-            //mengecek credential (LOGIN)
             $credentials = request(['email', 'password']);
             if (!Auth::attempt($credentials)) {
                 return ResponseFormatter::error([
@@ -33,13 +32,11 @@ class UserController extends Controller
                 ], 'Authentication Failed', 500);
             }
 
-            //jika hash gagal beri error
             $user = User::where('email', $request->email)->first();
             if (!Hash::check($request->password, $user->password, [])) {
                 throw new \Exception('Invalid Credentials');
             }
 
-            //jika berhasil login
             $tokenResult = $user->createToken('authToken')->plainTextToken;
             return ResponseFormatter::success([
                 'access_token' => $tokenResult,
@@ -49,7 +46,7 @@ class UserController extends Controller
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => 'Something went wrong',
-                'error' => $error
+                'error' => $error,
             ], 'Authentication Failed', 500);
         }
     }

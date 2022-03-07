@@ -29,11 +29,11 @@
                         <tr>
                             <td class="border px-6 py-4 text-center">{{ $item->id }}</td>
                             <td class="border px-6 py-2 ">
-                                <img src="{{ url('assets/user').$item->profile_photo_path }}" class="rounded" style="width: 50px">    
+                                <img src="{{ $item->profile_photo_path }}" alt="" class="rounded" style="width: 100px">    
                             </td>
                             <td class="border px-6 py-4 ">{{ $item->name }}</td>
                             <td class="border px-6 py-4">{{ $item->email }}</td>
-                            <td class="border px-6 py-4">{{ $item->roles }}</td>
+                            <td class="border px-6 py-4 text-center">{{ $item->roles }}</td>
                             <td class="border px-6 py-4" style=" display:flex; align-items:center; justify-content: space-evenly;">
                                     <a href="{{ route('users.edit', $item->id) }}" class="text-white font-bold py-2 px-4 rounded" style="background-color: #2666CF;">
                                         Edit
